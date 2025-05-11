@@ -3,6 +3,11 @@ let computerScore = 0;
 
 const choices = document.querySelectorAll(".choice");
 
+const msg = document.querySelector("#msg");
+
+const userScorePara = document.querySelector("#user-score");
+const computerScorePara = document.querySelector("#comp-score");
+
 const genComputerChoice = () => {
     //store choices in an array
     const options = ["rock", "paper", "scissors"];
@@ -17,14 +22,24 @@ const genComputerChoice = () => {
 const drawGame = () => {
     // console.log("game was draw");
     console.log("It is a tie.");
+    msg.innerText = "It is a tie. /Play again";
+    msg.style.backgroundColor = "#081b31";
 };
 
 // function to show winner
-const showWinner = (userWin) => {
+const showWinner = (userWin, userChoice, computerChoice) => {
     if(userWin){
-        console.log("user Wins!");
+        userScore++; //incrementing user score
+        userScorePara.innerText = userScore;       
+         console.log("user Wins!");
+        msg.innerText = `user Wins!  user ${userChoice} beats ${computerChoice}`;
+        msg.style.backgroundColor = "green";
     }else{
-        console.log("user loses!");
+        computerScore++;
+        computerScorePara.innerText = computerScore;
+        console.log("user lose!");
+        msg.innerText = `user lose! ${computerChoice} beats user ${userChoice}`;
+        msg.style.backgroundColor = "red";
     }
 };
 
@@ -33,11 +48,11 @@ const showWinner = (userWin) => {
 const playGame = (userChoice) => {        // taking random choice from computer
     // Standardize userChoice to lowercase
     // userChoice = userChoice.toLowerCase();
-  console.log("user Choice =",userChoice ); // printing user choice
+ console.log("user Choice =",userChoice ); // printing user choice
 
   //Generate computer choice -> modular
   const computerChoice = genComputerChoice();
-  console.log("computer choice =", computerChoice); // printing computer choice
+ console.log("computer choice =", computerChoice); // printing computer choice
 
 
 
@@ -68,7 +83,7 @@ const playGame = (userChoice) => {        // taking random choice from computer
 
 
   // showing result
-  showWinner(userWin);  // function call
+  showWinner(userWin, userChoice, computerChoice);  // function call
   }
 };
 
