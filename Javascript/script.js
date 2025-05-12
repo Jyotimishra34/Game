@@ -1,6 +1,7 @@
 let userScore= 0;
 let computerScore = 0;
 
+//accessing all the divs with class choice
 const choices = document.querySelectorAll(".choice");
 
 const msg = document.querySelector("#msg");
@@ -45,42 +46,38 @@ const showWinner = (userWin, userChoice, computerChoice) => {
 
 
 //(choice ) function for computer
-const playGame = (userChoice) => {        // taking random choice from computer
-    // Standardize userChoice to lowercase
-    // userChoice = userChoice.toLowerCase();
+const playGame = (userChoice) => {         // taking random choice from computer
  console.log("user Choice =",userChoice ); // printing user choice
 
-  //Generate computer choice -> modular
-  const computerChoice = genComputerChoice();
+  //Generate computer choice -> Modular way (generate a function for each choice)
+  const computerChoice = genComputerChoice();  // calling function
  console.log("computer choice =", computerChoice); // printing computer choice
 
 
 
   //who wins between user and computer
-//   let userWins;
   if(userChoice === computerChoice){
     // console.log("It is a tie");
     drawGame();   //function call
-  }else {
+  }
+  else {
    let userWin = true;
+
     if(userChoice === "rock" ){
         //computer choice-  paper, scissors
         userWin = computerChoice === "paper" ? false : true ;    // user wins when computer choice is scissor or 
-                                                                   // user loose when computer choice is paper
-
+                                                                   // user lose when computer choice is paper
   }
   else if(userChoice === "paper"){
         //computer choice - scissors, rock
         userWin = computerChoice === "scissors" ? false : true ;    // user wins when computer choice is rock or 
-                                                               // user loose when computer choice is scissors
+                                                               // user lose when computer choice is scissors
     }
-
     else{
         // computer choice -  rock, paper
         userWin = computerChoice === "rock" ? false : true;  // user wins when computer choice is paper or 
-                                                               // user loose when computer choice is rock
+                                                               // user lose when computer choice is rock
     }
-
 
   // showing result
   showWinner(userWin, userChoice, computerChoice);  // function call
@@ -93,7 +90,7 @@ choices.forEach((choice) => {
     choice.addEventListener("click",() => {
         // we can access id of each div
         const userChoice = choice.getAttribute("id");
-        // console.log("choice was clicked", userChoice);
+        console.log("choice was clicked", userChoice);
         //call playGame and pass userChoice
         playGame(userChoice);
     });
